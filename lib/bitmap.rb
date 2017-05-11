@@ -9,7 +9,7 @@ class Bitmap
 
     @m = m
     @n = n
-    @matrix = Array.new(n) { Array.new(m, WHITE) }
+    clear
   end
 
   def render
@@ -22,5 +22,9 @@ class Bitmap
     raise "C must be in the range A to Z" unless ('A'..'Z').include? colour
 
     @matrix[y - 1][x - 1] = colour
+  end
+
+  def clear
+    @matrix = Array.new(@n) { Array.new(@m, WHITE) }
   end
 end

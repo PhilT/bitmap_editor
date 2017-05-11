@@ -1,10 +1,13 @@
 require_relative '../lib/bitmap'
 
 RSpec.describe Bitmap do
+  subject { described_class.new(4, 2) }
+  let(:initial_bitmap) { [%w(O O O O), %w(O O O O)] }
+
   describe 'initialization' do
     it 'returns a new 2 dimensional array of the specified size' do
       subject = described_class.new(4, 2)
-      expect(subject.render).to eq [%w(O O O O), %w(O O O O)]
+      expect(subject.render).to eq initial_bitmap
     end
 
     it 'errors when width is too small' do
@@ -33,15 +36,23 @@ RSpec.describe Bitmap do
   end
 
   describe 'apply' do
-    subject { described_class.new(4, 2) }
-
-    it 'colours pixel' do
+    it 'colours a pixel' do
       subject.apply(4, 1, 'A')
       expect(subject.render).to eq [%w(O O O A), %w(O O O O)]
     end
 
+    it 'clears the bitmap' do
+      subject.apply(4, 1, 'A')
+      subject.clear
+
+      expect(subject.render).to eq initial_bitmap
+    end
+
     it 'errors when C is not a letter' do
       expect{ subject.apply(1, 1, '1') }.to raise_error(
+        'C must be in the range A to Z'
+      )
+      expect{ subject.apply(1, 1, 'a') }.to raise_error(
         'C must be in the range A to Z'
       )
     end
