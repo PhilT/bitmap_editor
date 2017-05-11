@@ -41,13 +41,6 @@ RSpec.describe Bitmap do
       expect(subject.render).to eq [%w(O O O A), %w(O O O O)]
     end
 
-    it 'clears the bitmap' do
-      subject.apply(4, 1, 'A')
-      subject.clear
-
-      expect(subject.render).to eq initial_bitmap
-    end
-
     it 'errors when C is not a letter' do
       expect{ subject.apply(1, 1, '1') }.to raise_error(
         'C must be in the range A to Z'
@@ -79,6 +72,15 @@ RSpec.describe Bitmap do
       expect{ subject.apply(1, 3, nil) }.to raise_error(
         'Y must be in the range 1 to 2'
       )
+    end
+  end
+
+  describe 'clear' do
+    it 'clears the bitmap' do
+      subject.apply(4, 1, 'A')
+      subject.clear
+
+      expect(subject.render).to eq initial_bitmap
     end
   end
 end
