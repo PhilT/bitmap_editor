@@ -15,4 +15,12 @@ class Bitmap
   def render
     @matrix.freeze.clone
   end
+
+  def apply(x, y, colour)
+    raise "X must be in the range 1 to #{@m}" if x < 1 || x > @m
+    raise "Y must be in the range 1 to #{@n}" if y < 1 || y > @n
+    raise "C must be in the range A to Z" unless ('A'..'Z').include? colour
+
+    @matrix[y - 1][x - 1] = colour
+  end
 end
