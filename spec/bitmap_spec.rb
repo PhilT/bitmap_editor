@@ -2,9 +2,8 @@ require_relative '../lib/bitmap'
 
 RSpec.describe Bitmap do
   it 'returns a new 2 dimensional array of the specified size' do
-    subject = described_class.new(4, 5)
-    expect(subject.m).to eq 4
-    expect(subject.n).to eq 5
+    subject = described_class.new(4, 2)
+    expect(subject.render).to eq [%w(O O O O), %w(O O O O)]
   end
 
   it 'returns error when width is too small' do

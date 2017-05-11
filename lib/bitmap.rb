@@ -1,8 +1,7 @@
 class Bitmap
   MAX_WIDTH = 250
   MAX_HEIGHT = 250
-
-  attr_reader :m, :n
+  WHITE = 'O'
 
   def initialize(m, n)
     raise "M must be in the range 1 to #{MAX_WIDTH}" if m < 1 || m > MAX_WIDTH
@@ -10,5 +9,10 @@ class Bitmap
 
     @m = m
     @n = n
+    @matrix = Array.new(n) { Array.new(m, WHITE) }
+  end
+
+  def render
+    @matrix.freeze.clone
   end
 end
