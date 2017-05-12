@@ -1,15 +1,19 @@
+require_relative 'bitmap'
+require_relative 'command_processor'
+
 class BitmapEditor
+  def initialize
+    @bitmap = Bitmap.new
+    @processor = CommandProcessor.new(@bitmap)
+  end
+
   def run(file, kernel = Kernel)
-    return kernel.puts "please provide correct file" if file.nil? || !File.exists?(file)
+    raise "please provide correct file" unless file && File.exists?(file)
 
     File.open(file).each do |line|
-      line = line.chomp
-      case line
-      when 'S'
-        kernel.puts "There is no image"
-      else
-        kernel.puts 'unrecognised command :('
-      end
+      @processor.call(line.chomp)
     end
+  rescue => e
+    kernel.puts e.message
   end
 end

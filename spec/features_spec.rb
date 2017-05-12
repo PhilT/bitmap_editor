@@ -2,8 +2,6 @@ require_relative '../lib/bitmap_editor'
 
 RSpec.describe BitmapEditor do
   let(:kernel) { double puts: nil }
-  subject { described_class.new }
-
 
   context 'when valid input' do
     it 'outputs expected bitmap given valid input' do

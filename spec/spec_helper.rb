@@ -42,7 +42,7 @@ RSpec.configure do |config|
   config.warnings = true
   config.order = :random
   config.default_formatter = 'doc' if config.files_to_run.one?
-  config.profile_examples = 10 unless config.files_to_run.one?
+  config.profile_examples = 5 unless config.files_to_run.one?
 
   Kernel.srand config.seed
 end

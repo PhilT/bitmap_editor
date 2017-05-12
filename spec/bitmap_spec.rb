@@ -1,35 +1,35 @@
 require_relative '../lib/bitmap'
 
 RSpec.describe Bitmap do
-  subject { described_class.new(4, 2) }
+  subject { described_class.new.create(4, 2) }
   let(:initial_bitmap) { [%w(O O O O), %w(O O O O)] }
 
-  describe 'initialization' do
+  describe 'create' do
     it 'returns a new 2 dimensional array of the specified size' do
-      subject = described_class.new(4, 2)
-      expect(subject.render).to eq initial_bitmap
+      subject = described_class.new.create(4, 2)
+      expect(subject.show).to eq initial_bitmap
     end
 
     it 'errors when width is too small' do
-      expect{ described_class.new(0, 1) }.to raise_error(
+      expect{ described_class.new.create(0, 1) }.to raise_error(
         "M must be in the range 1 to #{Bitmap::MAX_WIDTH}"
       )
     end
 
     it 'errors when height is too small' do
-      expect{ described_class.new(1, 0) }.to raise_error(
+      expect{ described_class.new.create(1, 0) }.to raise_error(
         "N must be in the range 1 to #{Bitmap::MAX_HEIGHT}"
       )
     end
 
     it 'errors when M is too large' do
-      expect{ described_class.new(Bitmap::MAX_WIDTH + 1, 1) }.to raise_error(
+      expect{ described_class.new.create(Bitmap::MAX_WIDTH + 1, 1) }.to raise_error(
         "M must be in the range 1 to #{Bitmap::MAX_WIDTH}"
       )
     end
 
     it 'errors when N is too large' do
-      expect{ described_class.new(1, Bitmap::MAX_HEIGHT + 1) }.to raise_error(
+      expect{ described_class.new.create(1, Bitmap::MAX_HEIGHT + 1) }.to raise_error(
         "N must be in the range 1 to #{Bitmap::MAX_HEIGHT}"
       )
     end
@@ -38,7 +38,7 @@ RSpec.describe Bitmap do
   describe 'apply' do
     it 'colours a pixel' do
       subject.apply(4, 1, 'A')
-      expect(subject.render).to eq [%w(O O O A), %w(O O O O)]
+      expect(subject.show).to eq [%w(O O O A), %w(O O O O)]
     end
 
     it 'errors when C is not a letter' do
@@ -80,7 +80,7 @@ RSpec.describe Bitmap do
       subject.apply(4, 1, 'A')
       subject.clear
 
-      expect(subject.render).to eq initial_bitmap
+      expect(subject.show).to eq initial_bitmap
     end
   end
 end
