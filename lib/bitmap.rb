@@ -4,18 +4,14 @@ class Bitmap
   WHITE = 'O'
 
   def create(m, n)
-    raise "M must be in the range 1 to #{MAX_WIDTH}" if m < 1 || m > MAX_WIDTH
-    raise "N must be in the range 1 to #{MAX_HEIGHT}" if n < 1 || n > MAX_HEIGHT
+    @m = m.to_i
+    @n = n.to_i
 
-    @m = m
-    @n = n
+    raise "M must be in the range 1 to #{MAX_WIDTH}" if @m < 1 || @m > MAX_WIDTH
+    raise "N must be in the range 1 to #{MAX_HEIGHT}" if @n < 1 || @n > MAX_HEIGHT
+
     clear
     self
-  end
-
-  def show
-    validate
-    @matrix.freeze.clone
   end
 
   def clear
@@ -24,6 +20,8 @@ class Bitmap
 
   def apply(x, y, colour)
     validate
+    x = x.to_i
+    y = y.to_i
     raise "X must be in the range 1 to #{@m}" if x < 1 || x > @m
     raise "Y must be in the range 1 to #{@n}" if y < 1 || y > @n
     raise "C must be in the range A to Z" unless ('A'..'Z').include? colour
@@ -32,11 +30,20 @@ class Bitmap
   end
 
   def vertical(x, y1, y2, colour)
-
+    x = x.to_i
+    y = y.to_i
+    y2 = y2.to_i
   end
 
   def horizontal(x1, x2, y, colour)
+    x1 = x1.to_i
+    x2 = x2.to_i
+    y = y.to_i
+  end
 
+  def show
+    validate
+    @matrix.freeze.clone
   end
 
   private
