@@ -18,6 +18,10 @@ class Bitmap
     @matrix.freeze.clone
   end
 
+  def clear
+    @matrix = Array.new(@n) { Array.new(@m, WHITE) }
+  end
+
   def apply(x, y, colour)
     validate
     raise "X must be in the range 1 to #{@m}" if x < 1 || x > @m
@@ -27,8 +31,12 @@ class Bitmap
     @matrix[y - 1][x - 1] = colour
   end
 
-  def clear
-    @matrix = Array.new(@n) { Array.new(@m, WHITE) }
+  def vertical(x, y1, y2, colour)
+
+  end
+
+  def horizontal(x1, x2, y, colour)
+
   end
 
   private

@@ -2,6 +2,11 @@ require_relative 'bitmap'
 
 class CommandProcessor
   COMMANDS = {
+    'I' => 'create',
+    'C' => 'clear',
+    'L' => 'apply',
+    'V' => 'vertical',
+    'H' => 'horizontal',
     'S' => 'show'
   }.freeze
 
