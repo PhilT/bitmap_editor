@@ -8,10 +8,11 @@ class BitmapEditor
   end
 
   def run(file, kernel = Kernel)
-    raise "please provide correct file" unless file && File.exists?(file)
+    raise "please provide correct file" unless file && File.exist?(file)
 
     File.open(file).each do |line|
-      @processor.call(line.chomp)
+      output = @processor.call(line.chomp)
+      kernel.puts output if output
     end
   rescue => e
     kernel.puts e.message

@@ -5,8 +5,6 @@ RSpec.describe BitmapEditor do
 
   context 'when valid input' do
     it 'outputs expected bitmap given valid input' do
-      pending 'not implemented'
-
       subject.run File.join(__dir__, '../examples/input.txt'), kernel
 
       expect(kernel).to have_received(:puts).with(
@@ -18,6 +16,7 @@ RSpec.describe BitmapEditor do
         OWOOO
         OWOOO
         OUTPUT
+        .strip
       )
     end
   end

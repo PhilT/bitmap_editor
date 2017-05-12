@@ -11,11 +11,12 @@ class Bitmap
     raise "N must be in the range 1 to #{MAX_HEIGHT}" if @n < 1 || @n > MAX_HEIGHT
 
     clear
-    self
+    nil
   end
 
   def clear
     @matrix = Array.new(@n) { Array.new(@m, WHITE) }
+    nil
   end
 
   def apply(x, y, colour)
@@ -27,6 +28,7 @@ class Bitmap
     raise "C must be in the range A to Z" unless ('A'..'Z').include? colour
 
     @matrix[y - 1][x - 1] = colour
+    nil
   end
 
   def vertical(x, y1, y2, colour)
@@ -37,6 +39,7 @@ class Bitmap
     (y1..y2).each do |y|
       apply(x, y, colour)
     end
+    nil
   end
 
   def horizontal(x1, x2, y, colour)
@@ -47,11 +50,12 @@ class Bitmap
     (x1..x2).each do |x|
       apply(x, y, colour)
     end
+    nil
   end
 
   def show
     validate
-    @matrix.freeze.clone
+    @matrix.map{|n| n.join('') }.join("\n")
   end
 
   private
