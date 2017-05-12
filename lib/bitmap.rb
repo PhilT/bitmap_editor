@@ -31,14 +31,22 @@ class Bitmap
 
   def vertical(x, y1, y2, colour)
     x = x.to_i
-    y = y.to_i
+    y1 = y1.to_i
     y2 = y2.to_i
+
+    (y1..y2).each do |y|
+      apply(x, y, colour)
+    end
   end
 
   def horizontal(x1, x2, y, colour)
     x1 = x1.to_i
     x2 = x2.to_i
     y = y.to_i
+
+    (x1..x2).each do |x|
+      apply(x, y, colour)
+    end
   end
 
   def show

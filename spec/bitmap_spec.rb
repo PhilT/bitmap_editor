@@ -85,8 +85,28 @@ RSpec.describe Bitmap do
   end
 
   describe 'vertical' do
+    it 'colours a vertical line' do
+      subject.vertical('1', '1', '2', 'A')
+      expect(subject.show).to eq [%w(A O O O), %w(A O O O)]
+    end
+
+    it 'errors when coordinate is out of range' do
+      expect{ subject.vertical('0', '1', '2', nil) }.to raise_error(
+        'X must be in the range 1 to 4'
+      )
+    end
   end
 
   describe 'horizontal' do
+    it 'colours a horizontal line' do
+      subject.horizontal('1', '3', '2', 'A')
+      expect(subject.show).to eq [%w(O O O O), %w(A A A O)]
+    end
+
+    it 'errors when coordinate is out of range' do
+      expect{ subject.horizontal('0', '1', '2', nil) }.to raise_error(
+        'X must be in the range 1 to 4'
+      )
+    end
   end
 end
