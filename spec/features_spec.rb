@@ -21,10 +21,17 @@ RSpec.describe BitmapEditor do
     end
   end
 
+  context 'when show not called' do
+    it 'returns error message' do
+      subject.run File.join(__dir__, '../examples/no_show.txt'), kernel
+      expect(kernel).to have_received(:puts).with 'Show never called'
+    end
+  end
+
   context 'when no file' do
     it 'returns instruction' do
       subject.run 'bla.txt', kernel
-      expect(kernel).to have_received(:puts).with 'please provide correct file'
+      expect(kernel).to have_received(:puts).with 'Please provide correct file'
     end
   end
 

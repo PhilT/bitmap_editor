@@ -14,7 +14,7 @@ RSpec.describe CommandProcessor do
 
   context 'when unknown command' do
     it 'errors' do
-      expect{ subject.call('') }.to raise_error 'unrecognised command :('
+      expect(subject.call('')).to eq 'unrecognised command :('
     end
   end
 

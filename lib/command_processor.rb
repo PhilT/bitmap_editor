@@ -18,7 +18,7 @@ class CommandProcessor
   def call(params)
     args = params.split(' ')
     method = COMMANDS[args.shift]
-    raise 'unrecognised command :(' unless method
+    return 'unrecognised command :(' unless method
     @bitmap.send(method, *args)
   end
 end
