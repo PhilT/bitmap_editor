@@ -185,7 +185,7 @@ RSpec.describe Bitmap do
     end
 
     it 'errors when not created' do
-      expect{ described_class.new.show }.to raise_error('There is no image')
+      expect(described_class.new.show).to eq('There is no image')
     end
   end
 end

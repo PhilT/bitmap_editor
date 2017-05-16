@@ -3,7 +3,6 @@ class Bitmap
   MAX_HEIGHT = 250
   WHITE = 'O'
 
-
   def create(m, n = nil)
     if n.nil?
       @matrix = m.split("\n").map { |x| x.split('') }
@@ -76,7 +75,7 @@ class Bitmap
   end
 
   def show
-    validate
+    return 'There is no image' unless defined?(@matrix)
     @matrix.map{|n| n.join('') }.join("\n")
   end
 

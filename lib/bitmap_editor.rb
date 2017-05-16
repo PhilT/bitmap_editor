@@ -8,13 +8,13 @@ class BitmapEditor
   end
 
   def run(file, kernel = Kernel)
-    raise "please provide correct file" unless file && File.exist?(file)
+    return kernel.puts "Please provide correct file" unless file && File.exist?(file)
 
+    output = nil
     File.open(file).each do |line|
       output = @processor.call(line.chomp)
-      kernel.puts output if output
+      break if output.is_a? String
     end
-  rescue => e
-    kernel.puts e.message
+    kernel.puts output || 'Show never called'
   end
 end
