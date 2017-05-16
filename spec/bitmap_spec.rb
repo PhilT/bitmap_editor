@@ -36,6 +36,24 @@ RSpec.describe Bitmap do
     it 'returns nil' do
       expect(subject.create('4', '2')).to be nil
     end
+
+    context 'when given a bitmap' do
+      let(:bitmap) do
+        <<~BITMAP
+          OAOO
+          OBCO
+          OOOC
+          OOOC
+          OOOO
+        BITMAP
+          .strip
+      end
+
+      it 'stores that bitmap' do
+        subject.create(bitmap)
+        expect(subject.show).to eq bitmap
+      end
+    end
   end
 
   describe 'clear' do

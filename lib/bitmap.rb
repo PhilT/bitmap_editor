@@ -3,14 +3,21 @@ class Bitmap
   MAX_HEIGHT = 250
   WHITE = 'O'
 
-  def create(m, n)
-    @m = m.to_i
-    @n = n.to_i
+
+  def create(m, n = nil)
+    if n.nil?
+      @matrix = m.split("\n").map { |x| x.split('') }
+      @m = @matrix.first.length
+      @n = @matrix.length
+    else
+      @m = m.to_i
+      @n = n.to_i
+    end
 
     raise "M must be in the range 1 to #{MAX_WIDTH}" if @m < 1 || @m > MAX_WIDTH
     raise "N must be in the range 1 to #{MAX_HEIGHT}" if @n < 1 || @n > MAX_HEIGHT
 
-    clear
+    clear unless @matrix
     nil
   end
 
