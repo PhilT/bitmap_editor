@@ -7,6 +7,7 @@ class CommandProcessor
     'L' => 'apply',
     'V' => 'vertical',
     'H' => 'horizontal',
+    'F' => 'fill',
     'S' => 'show'
   }.freeze
 

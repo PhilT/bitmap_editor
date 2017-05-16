@@ -71,6 +71,32 @@ RSpec.describe Bitmap do
     end
   end
 
+  describe 'fill' do
+    let(:bitmap) do
+      <<~BITMAP
+          OAOO
+          OBCO
+          OOOC
+          OOOC
+          DDOO
+      BITMAP
+        .strip
+    end
+    before { subject.create(bitmap) }
+
+    it 'fills contiguous block of colour', focus: true do
+      subject.fill(2, 3, 'X')
+      expect(subject.show).to eq <<~BITMAP
+        XAOO
+        XBCO
+        XXXC
+        XXXC
+        DDXX
+      BITMAP
+        .strip
+    end
+  end
+
   describe 'apply' do
     before { subject.create('4', '2') }
 

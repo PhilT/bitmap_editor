@@ -60,6 +60,21 @@ class Bitmap
     nil
   end
 
+  def fill(x, y, colour, current_colour = nil)
+    current_colour ||= @matrix[y - 1][x - 1]
+
+    return if x < 1 || x > @m || y < 1 || y > @n
+    return if @matrix[y - 1][x - 1] != current_colour
+
+    @matrix[y - 1][x - 1] = colour
+
+    fill(x + 1, y, colour, current_colour)
+    fill(x - 1, y, colour, current_colour)
+    fill(x, y + 1, colour, current_colour)
+    fill(x, y - 1, colour, current_colour)
+    nil
+  end
+
   def show
     validate
     @matrix.map{|n| n.join('') }.join("\n")
