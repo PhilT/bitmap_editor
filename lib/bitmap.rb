@@ -13,8 +13,8 @@ class Bitmap
       @n = n.to_i
     end
 
-    raise "M must be in the range 1 to #{MAX_WIDTH}" if @m < 1 || @m > MAX_WIDTH
-    raise "N must be in the range 1 to #{MAX_HEIGHT}" if @n < 1 || @n > MAX_HEIGHT
+    return "M must be in the range 1 to #{MAX_WIDTH}" if @m < 1 || @m > MAX_WIDTH
+    return "N must be in the range 1 to #{MAX_HEIGHT}" if @n < 1 || @n > MAX_HEIGHT
 
     clear unless defined?(@matrix)
     nil
@@ -26,12 +26,12 @@ class Bitmap
   end
 
   def apply(x, y, colour)
-    validate
+    return 'There is no image' unless defined?(@matrix)
     x = x.to_i
     y = y.to_i
-    raise "X must be in the range 1 to #{@m}" if x < 1 || x > @m
-    raise "Y must be in the range 1 to #{@n}" if y < 1 || y > @n
-    raise "C must be in the range A to Z" unless ('A'..'Z').include? colour
+    return "X must be in the range 1 to #{@m}" if x < 1 || x > @m
+    return "Y must be in the range 1 to #{@n}" if y < 1 || y > @n
+    return "C must be in the range A to Z" unless ('A'..'Z').include? colour
 
     set(x, y, colour)
     nil
@@ -43,7 +43,8 @@ class Bitmap
     y2 = y2.to_i
 
     (y1..y2).each do |y|
-      apply(x, y, colour)
+      output = apply(x, y, colour)
+      return output if output
     end
     nil
   end
@@ -54,7 +55,8 @@ class Bitmap
     y = y.to_i
 
     (x1..x2).each do |x|
-      apply(x, y, colour)
+      output = apply(x, y, colour)
+      return output if output
     end
     nil
   end
@@ -87,9 +89,5 @@ class Bitmap
 
   def get(x, y)
     @matrix[y - 1][x - 1]
-  end
-
-  def validate
-    raise 'There is no image' unless defined?(@matrix)
   end
 end
