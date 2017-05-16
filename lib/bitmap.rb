@@ -17,7 +17,7 @@ class Bitmap
     raise "M must be in the range 1 to #{MAX_WIDTH}" if @m < 1 || @m > MAX_WIDTH
     raise "N must be in the range 1 to #{MAX_HEIGHT}" if @n < 1 || @n > MAX_HEIGHT
 
-    clear unless @matrix
+    clear unless defined?(@matrix)
     nil
   end
 
@@ -34,7 +34,7 @@ class Bitmap
     raise "Y must be in the range 1 to #{@n}" if y < 1 || y > @n
     raise "C must be in the range A to Z" unless ('A'..'Z').include? colour
 
-    @matrix[y - 1][x - 1] = colour
+    set(x, y, colour)
     nil
   end
 
@@ -61,12 +61,12 @@ class Bitmap
   end
 
   def fill(x, y, colour, current_colour = nil)
-    current_colour ||= @matrix[y - 1][x - 1]
+    current_colour ||= get(x, y)
 
     return if x < 1 || x > @m || y < 1 || y > @n
-    return if @matrix[y - 1][x - 1] != current_colour
+    return if get(x, y) != current_colour
 
-    @matrix[y - 1][x - 1] = colour
+    set(x, y, colour)
 
     fill(x + 1, y, colour, current_colour)
     fill(x - 1, y, colour, current_colour)
@@ -81,6 +81,14 @@ class Bitmap
   end
 
   private
+
+  def set(x, y, colour)
+    @matrix[y - 1][x - 1] = colour
+  end
+
+  def get(x, y)
+    @matrix[y - 1][x - 1]
+  end
 
   def validate
     raise 'There is no image' unless defined?(@matrix)
