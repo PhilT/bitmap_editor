@@ -61,6 +61,9 @@ class Bitmap
   end
 
   def fill(x, y, colour, current_colour = nil)
+    validate
+    x = x.to_i
+    y = y.to_i
     current_colour ||= get(x, y)
 
     return if x < 1 || x > @m || y < 1 || y > @n
